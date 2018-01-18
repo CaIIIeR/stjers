@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="54ac2462-1aa7-4e8f-8e4d-1cbc3f211ac8" activeEnvironment="Default" name="WatchlistService?wsdl" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="7c140983-4a1e-4f7a-84d6-86b44825399b" wsaVersion="NONE" name="WatchlistBinding" type="wsdl" bindingName="{http://www.ttu.ee/idu0075/2017/ws/wlt}WatchlistBinding" soapVersion="1_1" anonymous="optional" definition="http://vigel:8080/WatchlistWebApplication/WatchlistService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://vigel:8080/WatchlistWebApplication/WatchlistService?wsdl"><con:part><con:url>http://vigel:8080/WatchlistWebApplication/WatchlistService?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown.-->
+<wsdl:definitions targetNamespace="http://www.ttu.ee/idu0075/2017/ws/wlt" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ttu.ee/idu0075/2017/ws/wlt">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.ttu.ee/idu0075/2017/ws/wlt" elementFormDefault="qualified">
+      <xs:complexType name="filmType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="year" type="xs:integer"/>
+          <xs:element name="genre" type="xs:string"/>
+          <xs:element name="durationInMinutes" type="xs:integer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="watchlistFilmType">
+        <xs:sequence>
+          <xs:element name="film" type="tns:filmType"/>
+          <xs:element name="dateAdded" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="watchlistFilmListType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="watchlistFilm" type="tns:watchlistFilmType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="watchlistType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="watchlistFilmList" type="tns:watchlistFilmListType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getFilmRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getFilmResponse" type="tns:filmType"/>
+      <xs:element name="addFilmRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="year" type="xs:integer"/>
+            <xs:element name="genre" type="xs:string"/>
+            <xs:element name="durationInMinutes" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addFilmResponse" type="tns:filmType"/>
+      <xs:element name="getFilmListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getFilmListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="film" type="tns:filmType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addWatchlistFilmRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="filmId" type="xs:integer"/>
+            <xs:element name="watchlistId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addWatchlistFilmResponse" type="tns:watchlistFilmType"/>
+      <xs:element name="addWatchlistRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addWatchlistResponse" type="tns:watchlistType"/>
+      <xs:element name="getWatchlistRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getWatchlistResponse" type="tns:watchlistType"/>
+      <xs:element name="getWatchlistListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element minOccurs="0" name="isEmpty">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="jah|ei"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getWatchlistListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="watchlist" type="tns:watchlistType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getWatchlistFilmListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="watchlistId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getWatchlistFilmListResponse" type="tns:watchlistFilmListType"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getFilmMessageRequest">
+    <wsdl:part name="parameter" element="tns:getFilmRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getFilmMessageResponse">
+    <wsdl:part name="parameter" element="tns:getFilmResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addFilmMessageRequest">
+    <wsdl:part name="parameter" element="tns:addFilmRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addFilmMessageResponse">
+    <wsdl:part name="parameter" element="tns:addFilmResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getFilmListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getFilmListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getFilmListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getFilmListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addWatchlistFilmMessageRequest">
+    <wsdl:part name="parameter" element="tns:addWatchlistFilmRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addWatchlistFilmMessageResponse">
+    <wsdl:part name="parameter" element="tns:addWatchlistFilmResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addWatchlistMessageRequest">
+    <wsdl:part name="parameter" element="tns:addWatchlistRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addWatchlistMessageResponse">
+    <wsdl:part name="parameter" element="tns:addWatchlistResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getWatchlistMessageRequest">
+    <wsdl:part name="parameter" element="tns:getWatchlistRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getWatchlistMessageResponse">
+    <wsdl:part name="parameter" element="tns:getWatchlistResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getWatchlistListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getWatchlistListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getWatchlistListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getWatchlistListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getWatchlistFilmListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getWatchlistFilmListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getWatchlistFilmListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getWatchlistFilmListResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="WatchlistPortType">
+    <wsdl:operation name="getFilm">
+      <wsdl:input message="tns:getFilmMessageRequest"/>
+      <wsdl:output message="tns:getFilmMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addFilm">
+      <wsdl:input message="tns:addFilmMessageRequest"/>
+      <wsdl:output message="tns:addFilmMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getFilmList">
+      <wsdl:input message="tns:getFilmListMessageRequest"/>
+      <wsdl:output message="tns:getFilmListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addWatchlistFilm">
+      <wsdl:input message="tns:addWatchlistFilmMessageRequest"/>
+      <wsdl:output message="tns:addWatchlistFilmMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addWatchList">
+      <wsdl:input message="tns:addWatchlistMessageRequest"/>
+      <wsdl:output message="tns:addWatchlistMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getWatchlist">
+      <wsdl:input message="tns:getWatchlistMessageRequest"/>
+      <wsdl:output message="tns:getWatchlistMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getWatchlistList">
+      <wsdl:input message="tns:getWatchlistListMessageRequest"/>
+      <wsdl:output message="tns:getWatchlistListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getWatchlistFilmlist">
+      <wsdl:input message="tns:getWatchlistFilmListMessageRequest"/>
+      <wsdl:output message="tns:getWatchlistFilmListMessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WatchlistBinding" type="tns:WatchlistPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getFilm">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addFilm">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFilmList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addWatchlistFilm">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addWatchList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWatchlist">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWatchlistList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWatchlistFilmlist">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WatchlistService">
+    <wsdl:port name="WatchlistPort" binding="tns:WatchlistBinding">
+      <soap:address location="http://vigel:8080/WatchlistWebApplication/WatchlistService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint></con:endpoints><con:operation id="1a17a645-7897-48c3-9136-4764930d3539" isOneWay="false" action="" name="addFilm" bindingOperationName="addFilm" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3526ea74-68ad-4f50-9724-ab693f03ecdb" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:addFilmRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:name>Logan</wlt:name>\r
+         <wlt:year>2016</wlt:year>\r
+         <wlt:genre>action</wlt:genre>\r
+         <wlt:durationInMinutes>120</wlt:durationInMinutes>\r
+      </wlt:addFilmRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/addFilmRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="94d95d87-ffb2-41ea-9cae-d335386b2d45" isOneWay="false" action="" name="addWatchList" bindingOperationName="addWatchList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c515f366-457b-445c-a6d3-f4eba24bdcec" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:addWatchlistRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:name>First</wlt:name>\r
+      </wlt:addWatchlistRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/addWatchListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="c7c35901-3670-47e6-85bc-6378441584e7" isOneWay="false" action="" name="addWatchlistFilm" bindingOperationName="addWatchlistFilm" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b390a35c-81bb-49bc-ade5-eaf407ce2e0c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:addWatchlistFilmRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:filmId>1</wlt:filmId>\r
+         <wlt:watchlistId>1</wlt:watchlistId>\r
+      </wlt:addWatchlistFilmRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/addWatchlistFilmRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="070ee1c0-6e7d-43a1-9886-5949775cb66a" isOneWay="false" action="" name="getFilm" bindingOperationName="getFilm" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b5a3fb58-2ea1-424c-8a29-9b4d99422212" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getFilmRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:id>1</wlt:id>\r
+      </wlt:getFilmRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getFilmRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="7ceecb9e-8972-45ff-9892-e69a803a6222" isOneWay="false" action="" name="getFilmList" bindingOperationName="getFilmList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f82de253-28d2-4ea9-a38c-e9ce6bf602c3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getFilmListRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+      </wlt:getFilmListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getFilmListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="677be1d0-9ff6-4f2d-b4c0-c32af8daec24" isOneWay="false" action="" name="getWatchlist" bindingOperationName="getWatchlist" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ccc0fb3c-e7c3-48c7-8a42-3339ba7fca4c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getWatchlistRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:id>1</wlt:id>\r
+      </wlt:getWatchlistRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getWatchlistRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="e170ccf6-c85f-4d42-a2be-5c7d198e454d" isOneWay="false" action="" name="getWatchlistFilmlist" bindingOperationName="getWatchlistFilmlist" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="78e678ef-28e7-4b4b-b1a4-f6f21b1cccb4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getWatchlistFilmListRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:watchlistId>1</wlt:watchlistId>\r
+      </wlt:getWatchlistFilmListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getWatchlistFilmlistRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="7558fe2a-cd13-4736-b610-e6b93d19066f" isOneWay="false" action="" name="getWatchlistList" bindingOperationName="getWatchlistList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1a04970c-6543-4262-9ca1-73e33476c001" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getWatchlistListRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <!--Optional:-->\r
+         <wlt:isEmpty>ei</wlt:isEmpty>\r
+      </wlt:getWatchlistListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getWatchlistListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="610e665f-2da2-4253-801b-1ad6253fa4f2" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a8ff9ba3-ddd1-406b-88e6-2d99927103ed" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addFilm" searchProperties="true"><con:settings/><con:testStep type="request" id="6adf3f75-d5fa-49af-9d1f-943b7b081c93" name="addFilm - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WatchlistBinding</con:interface><con:operation>addFilm</con:operation><con:request name="addFilm - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="6919612f-fb4b-40fa-ac75-9a99d8131b8a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:addFilmRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:name>Logan</wlt:name>\r
+         <wlt:year>2016</wlt:year>\r
+         <wlt:genre>action</wlt:genre>\r
+         <wlt:durationInMinutes>120</wlt:durationInMinutes>\r
+      </wlt:addFilmRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="34d6fd64-c1e8-4234-9422-753126cf2b4a" name="SOAP Response"/><con:assertion type="Schema Compliance" id="6342998e-cb82-460f-a076-59417d9bf332" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="83424c9b-b63a-4e66-87b1-abfbaa08884e" name="Contains"><con:configuration><token><![CDATA[<id>1</id>
+         <name>Logan</name>
+         <year>2016</year>
+         <genre>action</genre>
+         <durationInMinutes>120</durationInMinutes>
+]]></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/addFilmRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="cdd516e6-d192-4c50-bc6f-e1259df13a2d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addWatchlist" searchProperties="true"><con:settings/><con:testStep type="request" id="3645148a-0ec7-476e-8efe-8f7b414a64ab" name="addWatchList - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WatchlistBinding</con:interface><con:operation>addWatchList</con:operation><con:request name="addWatchList - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="750593b7-a450-4859-8473-5f3e36f831b0"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:addWatchlistRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:name>First</wlt:name>\r
+      </wlt:addWatchlistRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="7c4052e4-bf96-41e4-9db0-dc05c67e5bc3" name="SOAP Response"/><con:assertion type="Schema Compliance" id="541fbce3-34e1-40e4-9751-ab6db50f77e2" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="b69c0d55-35ec-4ba8-82de-2082f7c49727" name="Contains"><con:configuration><token>&lt;id>1&lt;/id>
+         &lt;name>First&lt;/name>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/addWatchListRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="6357eef1-0f8f-4020-8729-92eaadd0760a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addWatchlistFilm" searchProperties="true"><con:settings/><con:testStep type="request" id="0d4714b8-8365-4c20-94e0-ebf6e6055708" name="addWatchlistFilm - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WatchlistBinding</con:interface><con:operation>addWatchlistFilm</con:operation><con:request name="addWatchlistFilm - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="a0659205-1c67-4880-b0b9-67f933adc1b0"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:addWatchlistFilmRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:filmId>1</wlt:filmId>\r
+         <wlt:watchlistId>1</wlt:watchlistId>\r
+      </wlt:addWatchlistFilmRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="61b62c99-b440-4d0e-9672-6255c15d5fdb" name="SOAP Response"/><con:assertion type="Schema Compliance" id="1eb638f4-65da-43e4-8caf-373fa095b959" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="08f2b671-f839-46bf-ac6c-3385db02bec4" name="Contains"><con:configuration><token><![CDATA[<film>
+            <id>1</id>
+            <name>Logan</name>
+            <year>2016</year>
+            <genre>action</genre>
+            <durationInMinutes>120</durationInMinutes>
+         </film>
+         <dateAdded>]]></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/addWatchlistFilmRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="a3ee2c0f-b787-4baa-876d-ff7c698004b0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getFilm" searchProperties="true"><con:settings/><con:testStep type="request" id="7fcc2206-fbc5-4709-b26a-d86a8eeb5541" name="getFilm - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WatchlistBinding</con:interface><con:operation>getFilm</con:operation><con:request name="getFilm - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="46a17f99-361f-4978-bd7f-fa5c5bb91d6a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getFilmRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:id>1</wlt:id>\r
+      </wlt:getFilmRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="66c99f2c-b9e3-4a42-a7c8-a70679d6c497" name="SOAP Response"/><con:assertion type="Schema Compliance" id="540140da-bc1e-4def-a534-eb128d3a43d8" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="6db0c206-bbcb-49d5-80a7-af4659131383" name="Contains"><con:configuration><token><![CDATA[ <id>1</id>
+         <name>Logan</name>
+         <year>2016</year>
+         <genre>action</genre>
+         <durationInMinutes>120</durationInMinutes>
+]]></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getFilmRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="14936932-42e0-4ac3-9cba-c3a3fa38c1ae" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getFilmList" searchProperties="true"><con:settings/><con:testStep type="request" id="3368fed7-557f-4fc8-807f-010a3112b284" name="getFilmList - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WatchlistBinding</con:interface><con:operation>getFilmList</con:operation><con:request name="getFilmList - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3eff92f3-4c89-4b87-91a6-4650d24a40eb"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getFilmListRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+      </wlt:getFilmListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="828a1464-aae5-47af-af5e-cbc8a14ab8f5" name="SOAP Response"/><con:assertion type="Schema Compliance" id="c54ba34f-6cdc-4b7e-a1e3-12d1a7a56329" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="4548eedf-c76a-469d-a3f9-4501d6b1b8d7" name="Contains"><con:configuration><token><![CDATA[ <film>
+            <id>1</id>
+            <name>Logan</name>
+            <year>2016</year>
+            <genre>action</genre>
+            <durationInMinutes>120</durationInMinutes>
+         </film>
+]]></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getFilmListRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="dd1c337d-435e-4190-ac34-b35a05c91686" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getWatchlist" searchProperties="true"><con:settings/><con:testStep type="request" id="7ef791e3-3126-4d0a-b535-cb96f128d790" name="getWatchlist - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WatchlistBinding</con:interface><con:operation>getWatchlist</con:operation><con:request name="getWatchlist - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="9c4a54b2-dccc-401f-a47a-e31d59a7929d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getWatchlistRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:id>1</wlt:id>\r
+      </wlt:getWatchlistRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="eb6a4fea-a66d-44fe-a0de-16e7392d7781" name="SOAP Response"/><con:assertion type="Schema Compliance" id="7c7feedd-422b-40ca-b886-dc52d458d402" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="40ccee2c-f41a-4e47-a97f-3449162c5080" name="Contains"><con:configuration><token><![CDATA[<id>1</id>
+         <name>First</name>
+         <watchlistFilmList>
+            <watchlistFilm>
+               <film>
+                  <id>1</id>
+                  <name>Logan</name>
+                  <year>2016</year>
+                  <genre>action</genre>
+                  <durationInMinutes>120</durationInMinutes>
+               </film>
+               <dateAdded>]]></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getWatchlistRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="ece5f661-9454-4ec7-8b41-d71bb1fd7f44" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getWatchlistFilmList" searchProperties="true"><con:settings/><con:testStep type="request" id="770389b4-b8db-4ee3-b139-f7a21a7f0f6e" name="getWatchlistFilmlist - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WatchlistBinding</con:interface><con:operation>getWatchlistFilmlist</con:operation><con:request name="getWatchlistFilmlist - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="8be75e4b-599c-4886-af0b-aacdd0e26b14"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getWatchlistFilmListRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <wlt:watchlistId>1</wlt:watchlistId>\r
+      </wlt:getWatchlistFilmListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="c675212b-2b4e-4d96-88a3-d3c9eab31926" name="SOAP Response"/><con:assertion type="Schema Compliance" id="7b087317-8050-4aec-a57b-f35844c4dd67" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="5d246a6a-1194-428a-ab9f-4c7f72a9e407" name="Contains"><con:configuration><token><![CDATA[ <watchlistFilm>
+            <film>
+               <id>1</id>
+               <name>Logan</name>
+               <year>2016</year>
+               <genre>action</genre>
+               <durationInMinutes>120</durationInMinutes>
+            </film>
+            <dateAdded>]]></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getWatchlistFilmlistRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="69f3d1ee-b6cc-45d6-bcdb-b19397bcc7ba" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getWatchlistList" searchProperties="true"><con:settings/><con:testStep type="request" id="b11d2f8e-4e96-486d-a5fe-b83faf5cca58" name="getWatchlistList - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WatchlistBinding</con:interface><con:operation>getWatchlistList</con:operation><con:request name="getWatchlistList - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="723728a4-0d65-4333-9468-3280298da299"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://vigel:8080/WatchlistWebApplication/WatchlistService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wlt="http://www.ttu.ee/idu0075/2017/ws/wlt">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wlt:getWatchlistListRequest>\r
+         <wlt:token>salajane</wlt:token>\r
+         <!--Optional:-->\r
+         <wlt:isEmpty>ei</wlt:isEmpty>\r
+      </wlt:getWatchlistListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6b11af5b-63e9-4ebf-9f62-2cdda775009a" name="SOAP Response"/><con:assertion type="Schema Compliance" id="2b8dde5b-a7de-44e7-a488-02ac3aeaf557" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="Simple Contains" id="107e7987-6aeb-4265-bd4b-23612e0c00b7" name="Contains"><con:configuration><token><![CDATA[<watchlist>
+            <id>1</id>
+            <name>First</name>
+            <watchlistFilmList>
+               <watchlistFilm>
+                  <film>
+                     <id>1</id>
+                     <name>Logan</name>
+                     <year>2016</year>
+                     <genre>action</genre>
+                     <durationInMinutes>120</durationInMinutes>
+                  </film>
+                  <dateAdded>]]></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/wlt/WatchlistPortType/getWatchlistListRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
