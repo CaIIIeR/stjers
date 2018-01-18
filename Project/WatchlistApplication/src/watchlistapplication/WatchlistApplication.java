@@ -48,7 +48,12 @@ public class WatchlistApplication {
                 System.out.println("Duration in minutes:");
                 request.setDurationInMinutes((BigInteger.valueOf(Integer.valueOf(scanner.next()))));
 
+                FilmType newFilm = new FilmType();
+                newFilm = addFilm(request);
+                
                 System.out.println("FILM ADDED");
+                
+                //System.out.println(newFilm.getId());
 
             } else if (operation.equalsIgnoreCase("getFilm")) {
                 GetFilmRequest request = new GetFilmRequest();
@@ -57,7 +62,6 @@ public class WatchlistApplication {
                 System.out.println("Film id:");
                 request.setId((BigInteger.valueOf(Integer.valueOf(scanner.next()))));
                 System.out.println("Film:");
-                System.out.println("Id: " + getFilm(request).getId());
                 System.out.println("Name: " + getFilm(request).getName());
                 System.out.println("Year: " + getFilm(request).getYear());
                 System.out.println("Genre: " + getFilm(request).getGenre());
