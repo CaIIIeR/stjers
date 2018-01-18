@@ -37,24 +37,7 @@ public class WatchlistApplication {
                 System.out.println("Please input film data:");
 
                 System.out.println("Name:");
-                String name;
-
-                WatchlistService service = new WatchlistService();
-                GetFilmListRequest filmListRequest = new GetFilmListRequest();
-                filmListRequest.setToken(token);
-                List<FilmType> films = service.getWatchlistPort().getFilmList(filmListRequest).getFilm();
-
-                boolean filmAlreadyInList = true;
-                while (filmAlreadyInList) {
-                    name = scanner.next();
-                    filmAlreadyInList = checkIfFilmAlreadyInList(films, name);
-                    if (filmAlreadyInList) {
-                        System.out.println("Film already exists, use another name.");
-                    } else {
-                        request.setName(name);
-                        break;
-                    }
-                }
+                request.setName(scanner.next());
 
                 System.out.println("Year:");
                 request.setYear((BigInteger.valueOf(Integer.valueOf(scanner.next()))));
@@ -65,7 +48,7 @@ public class WatchlistApplication {
                 System.out.println("Duration in minutes:");
                 request.setDurationInMinutes((BigInteger.valueOf(Integer.valueOf(scanner.next()))));
 
-                System.out.println("FILM ADDED, FILM ID: " + addFilm(request).getId());
+                System.out.println("FILM ADDED");
 
             } else if (operation.equalsIgnoreCase("getFilm")) {
                 GetFilmRequest request = new GetFilmRequest();
